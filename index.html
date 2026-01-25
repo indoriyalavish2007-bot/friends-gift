@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Gift</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Georgia,serif;
+  background:#fde7f1;
+  overflow-y:auto;
+}
+
+/* COMMON */
+.page{
+  position:absolute;
+  inset:0;
+  display:none;
+  text-align:center;
+  padding-top:60px;
+  overflow-y:auto;
+}
+.page.active{display:block}
+
+/* ---------- PAGE 1 ---------- */
+#p1 img{width:140px;animation:bounce 1.8s infinite}
+@keyframes bounce{50%{transform:translateY(-8px)}}
+#p1 h1{color:#e06b9a;margin-top:20px}
+#p1 p{color:#e7a6c2}
+.loader{
+  width:70%;height:12px;background:#f3b6cd;
+  border-radius:20px;margin:40px auto;overflow:hidden
+}
+.loader div{
+  height:100%;width:0;background:#e85a94;
+  animation:load 3s forwards
+}
+@keyframes load{to{width:100%}}
+
+/* ---------- PAGE 2 ---------- */
+.big{font-size:34px;color:#ff6fa6;font-weight:bold}
+.card{
+  width:85%;margin:30px auto;
+  background:#f6d1e4;border-radius:18px;padding:20px
+}
+.btn{
+  margin-top:20px;padding:14px 26px;
+  border:none;border-radius:30px;
+  background:#ff6fa6;color:#fff;font-size:18px
+}
+
+/* ---------- PAGE 3 ---------- */
+.envelope{
+  width:85%;max-width:340px;height:200px;
+  background:#ffc6dd;margin:30px auto;
+  border-radius:16px;position:relative;
+  overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.15)
+}
+.flap{
+  position:absolute;top:0;left:0;
+  width:100%;height:55%;
+  background:#ffb3d1;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:.6s;
+}
+.envelope.open .flap{transform:rotateX(180deg)}
+.heart{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:56px;height:56px;
+  background:#ff6fa6;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:26px;cursor:pointer
+}
+
+/* ---------- PAGE 4 ---------- */
+.note{
+  width:90%;margin:20px auto;
+  background:#fff;border-radius:20px;
+  padding:20px;text-align:left;
+  max-height:65vh;overflow-y:auto
+}
+.note h3{color:#ff6fa6}
+.note p{line-height:1.7;color:#444}
+
+/* ---------- PAGE 5 (CASSETTE + CUTE FOOTER) ---------- */
+.song{
+  width:90%;
+  margin:20px auto;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+.song:nth-child(2){background:#bfe4f7}
+.song:nth-child(3){background:#f7c1dc}
+.song:nth-child(4){background:#d7f0d8}
+
+.label{
+  background:#ffe28a;
+  padding:6px;
+  border-radius:6px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.cassette{
+  background:#f9c8da;
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.reel{
+  width:34px;height:34px;
+  border-radius:50%;
+  border:5px solid #b48fc8;
+}
+.window{
+  width:80px;height:28px;
+  background:#333;border-radius:6px;
+}
+.play{
+  width:56px;height:56px;
+  background:#ff6fa6;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+  margin:12px auto 0;
+}
+
+/* cute footer */
+.cute-footer{
+  margin:30px 0 50px;
+}
+.cute-icons{
+  font-size:22px;
+  margin-bottom:14px;
+}
+.heart-icon{
+  animation:pulse 1.5s infinite;
+  margin:0 6px;
+}
+.star{
+  animation:twinkle 2s infinite;
+  margin:0 6px;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.3)}
+}
+@keyframes twinkle{
+  0%{opacity:.3}
+  50%{opacity:1}
+  100%{opacity:.3}
+}
+.next-btn{
+  padding:14px 36px;
+  border:none;
+  border-radius:30px;
+  background:#ff6fa6;
+  color:#fff;
+  font-size:18px;
+}
+
+/* ---------- PAGE 6 ---------- */
+#p6{
+  background:#fde7f1;
+  padding-top:50px;
+}
+
+.p6-top{
+  font-size:14px;
+  font-style:italic;
+  color:#e7a6c2;
+}
+
+.p6-title{
+  font-size:36px;
+  color:#ff6fa6;
+  line-height:1.1;
+  margin:6px 0;
+}
+
+.p6-sub{
+  font-size:15px;
+  color:#9c9c9c;
+  margin-bottom:20px;
+}
+
+/* scroll area */
+.p6-scroll{
+  width:100%;
+  padding-bottom:100px;
+}
+
+/* polaroid card */
+.polaroid{
+  width:78%;
+  margin:40px auto;
+  background:#fff;
+  padding:14px 14px 20px;
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  text-align:center;
+}
+
+.polaroid img{
+  width:100%;
+  border-radius:6px;
+}
+
+.polaroid p{
+  margin-top:12px;
+  font-size:16px;
+  color:#444;
+}
+
+/* tilt effects */
+.rotate-left{
+  transform:rotate(-5deg);
+}
+
+.rotate-right{
+  transform:rotate(5deg);
+}
+
+/* next button */
+.p6-next{
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:14px 40px;
+  border:none;
+  border-radius:30px;
+  background:#ff6fa6;
+  color:#fff;
+  font-size:18px;
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+/* ---------- PAGE 7 ---------- */
+#p7{
+  background:#fde7f1;
+  padding-top:50px;
+}
+
+.p7-top{
+  font-size:14px;
+  font-style:italic;
+  color:#e7a6c2;
+}
+
+.p7-title{
+  font-size:36px;
+  color:#ff6fa6;
+  margin:6px 0;
+}
+
+.p7-sub{
+  font-size:15px;
+  color:#9c9c9c;
+  margin-bottom:25px;
+  padding:0 20px;
+}
+
+.p7-list{
+  width:100%;
+  padding-bottom:100px;
+}
+
+.p7-card{
+  width:86%;
+  margin:22px auto;
+  background:#fdeff5;
+  border-radius:18px;
+  padding:26px 20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  text-align:center;
+}
+
+.p7-icon{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#ffd6e6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  margin:0 auto 10px;
+}
+
+.p7-card h3{
+  color:#ff6fa6;
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.p7-card p{
+  font-size:15px;
+  color:#555;
+  line-height:1.6;
+}
+
+.p7-line{
+  width:34px;
+  height:4px;
+  background:#f5a3c2;
+  border-radius:10px;
+  margin:14px auto 0;
+}
+
+.p7-next{
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:14px 40px;
+  border:none;
+  border-radius:30px;
+  background:#ff6fa6;
+  color:#fff;
+  font-size:18px;
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+/* ---------- PAGE 8 ---------- */
+#p8{
+  background:#fde7f1;
+  padding-top:50px;
+}
+
+.p8-top{
+  font-size:14px;
+  font-style:italic;
+  color:#e7a6c2;
+}
+
+.p8-title{
+  font-size:36px;
+  color:#ff6fa6;
+  margin:6px 0 25px;
+  line-height:1.1;
+}
+
+.final-card{
+  width:90%;
+  margin:0 auto 80px;
+  background:#f9c3d9;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+}
+
+.final-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#ff6fa6;
+  margin-bottom:14px;
+}
+
+.final-head .mail{
+  width:42px;
+  height:42px;
+  background:#ff6fa6;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+.final-letter{
+  background:#fff;
+  border-radius:16px;
+  padding:18px;
+  color:#444;
+  font-size:16px;
+  line-height:1.7;
+}
+
+.final-letter .hello{
+  font-style:italic;
+  color:#ff6fa6;
+  margin-bottom:10px;
+}
+
+.demo-text{
+  font-size:12px;
+  color:#666;
+  margin:14px 6px;
+  text-align:center;
+}
+
+.final-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:10px;
+}
+
+.seal-btn{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#ff6fa6;
+  color:#fff;
+  font-size:16px;
+}
+
+.restart-btn{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#cfa1c3;
+  color:#fff;
+  font-size:16px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <img src="teddy.png">
+  <h1>A Valentine Moment</h1>
+  <p>is being prepared for you...</p>
+  <div class="loader"><div></div></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <p style="color:#e7a6c2">Hey i have made something special for you…</p>
+  <div class="big">Will You Be My<br>Valentine ? 💘</div>
+  <div class="card">
+    A little reminder of what this day feels like with you.
+    <br>
+    <button class="btn" onclick="go(3)">Open This 💖</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <p style="color:#e7a6c2;font-style:italic">Just because today feels right</p>
+  <h2 style="color:#ff6fa6">A Valentine Note 💌</h2>
+
+  <div class="envelope" id="env">
+    <div class="flap"></div>
+    <div class="heart" onclick="openEnv()">💌</div>
+  </div>
+  <p style="color:#d88ca8">Click to open</p>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <div class="note">
+    <h3>Hey Nidha</h3>
+    <p>
+      I wanted to do something special today, simply because you matter to me.
+      Valentine’s Day isn’t about grand gestures — it’s about choosing someone
+      even in quiet moments.
+      <br><br>
+      No pressure, no expectations — just something sincere, from the heart. You are very important in my life
+    </p>
+    <p style="text-align:right;color:#ff8fb5">Always 🤍</p>
+  </div>
+  <button class="btn" onclick="go(5)">Keep Going ✨</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h2 style="color:#ff6fa6">Songs For You 💗</h2>
+
+  <div class="song">
+    <div class="label">Waalian</div>
+    <div class="cassette">
+      <div class="reel"></div>
+      <div class="window"></div>
+      <div class="reel"></div>
+    </div>
+    <div class="play" onclick="toggleSong(0,this)">▶</div>
+    <audio preload="none" src="https://hq.mr-punjab.com/temp/Waalian%20-%20Harnoor%20%28Mr-Punjab.Com%29-128kb.mp3"></audio>
+  </div>
+
+  <div class="song">
+    <div class="label">Lag Jaa Gale</div>
+    <div class="cassette">
+      <div class="reel"></div>
+      <div class="window"></div>
+      <div class="reel"></div>
+    </div>
+    <div class="play" onclick="toggleSong(1,this)">▶</div>
+    <audio preload="none" src="https://koshalworld.com/siteuploads/files/sfd27/13167/Lag%20Jaa%20Gale(KoshalWorld.Com).mp3"></audio>
+  </div>
+
+  <div class="song">
+    <div class="label">Billionare</div>
+    <div class="cassette">
+      <div class="reel"></div>
+      <div class="window"></div>
+      <div class="reel"></div>
+    </div>
+    <div class="play" onclick="toggleSong(2,this)">▶</div>
+    <audio preload="none" src="https://128.pagalnew.com/download-128k.php?id=34692"></audio>
+  </div>
+
+  <div class="cute-footer">
+    <div class="cute-icons">
+      <span class="heart-icon">💗</span>
+      <span class="star">✨</span>
+      <span class="star">⭐</span>
+      <span class="heart-icon">💖</span>
+    </div>
+    <button class="next-btn" onclick="stopMusic(); go(6)">Next 💕</button>
+     
+
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <p class="p6-top">the kind that matter</p>
+
+  <h2 class="p6-title">Some random<br>thoughts</h2>
+  <p class="p6-sub">Simple thoughts, genuine feelings 🤍</p>
+
+  <div class="p6-scroll">
+
+    <div class="polaroid rotate-left">
+      <img src="https://i.pinimg.com/170x/8d/ba/d9/8dbad957da18fe41df3f65012cf12d77.jpg">
+      <p>See i brought you flowers 💕</p>
+    </div>
+
+    <div class="polaroid rotate-right">
+      <img src="https://pbs.twimg.com/media/DOm_zq_WkAEJ7WC.jpg">
+      <p>Some extra flowers & a surprise gift 🎁</p>
+    </div>
+
+    <div class="polaroid rotate-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-nVITFeBLY0WID6WxwCk_40KOEADBb3deuq1FCGVIykhNtMK2q0GpgQE8GjJ1LKqJm8Y&usqp=CAU">
+      <p>Us? 🥺</p>
+    </div>
+
+  </div>
+
+  <button class="p6-next" onclick="go(7)">Next ✨ →</button>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+
+  <p class="p7-top">especially today</p>
+  <h2 class="p7-title">Why You Matter</h2>
+  <p class="p7-sub">
+    A glimpse into what makes you extraordinary to me
+  </p>
+
+  <div class="p7-list">
+
+    <div class="p7-card">
+      <div class="p7-icon">💗</div>
+      <h3>Genuine Heart</h3>
+      <p>You care in ways that feel real and unforced</p>
+      <div class="p7-line"></div>
+    </div>
+
+    <div class="p7-card">
+      <div class="p7-icon">🌸</div>
+      <h3>Calm Presence</h3>
+      <p>Being with you feels peaceful and grounding</p>
+      <div class="p7-line"></div>
+    </div>
+
+    <div class="p7-card">
+      <div class="p7-icon">🤍</div>
+      <h3>Kind Nature</h3>
+      <p>Your kindness shows up naturally, without trying</p>
+      <div class="p7-line"></div>
+    </div>
+
+    <div class="p7-card">
+      <div class="p7-icon">✨</div>
+      <h3>You Listen</h3>
+      <p>You pay attention, remember things, and it shows</p>
+      <div class="p7-line"></div>
+    </div>
+
+    <div class="p7-card">
+      <div class="p7-icon">🌙</div>
+      <h3>Soft Strength</h3>
+      <p>Gentle, steady, and emotionally present</p>
+      <div class="p7-line"></div>
+    </div>
+
+    <div class="p7-card">
+      <div class="p7-icon">⭐</div>
+      <h3>Just You</h3>
+      <p>Authentic, honest, and quietly special</p>
+      <div class="p7-line"></div>
+    </div>
+
+  </div>
+
+  <button class="p7-next" onclick="go(8)">Next ✨ →</button>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+
+  <p class="p8-top">the grand finale…</p>
+  <h2 class="p8-title">One Last Valentine<br>Thought</h2>
+
+  <div class="final-card">
+
+    <div class="final-head">
+      <span class="mail">✉️</span>
+      <h3>Final Love Letter</h3>
+    </div>
+
+    <div class="final-letter">
+      <p class="hello">Hey Nidha,</p>
+
+      <p>
+        This wasn’t about perfection, just honesty.
+      </p>
+
+      <p>
+        I wanted you to feel appreciated today.
+      </p>
+
+      <p>
+        Whatever comes next, I’m glad this moment exists.
+      </p>
+    </div>
+
+
+    <div class="final-actions">
+      <button class="restart-btn" onclick="restartAll()">Restart</button>
+
+    </div>
+
+
+<script>
+
+
+
+
+function hardRestart(){
+  location.reload(); // 🔥 100% reset, no state issues
+}
+
+function stopMusic(){
+  document.querySelectorAll("audio").forEach(a=>{
+    a.pause();
+    a.currentTime = 0;
+  });
+}
+const pages=document.querySelectorAll(".page");
+function go(n){
+  pages.forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+setTimeout(()=>go(2),3000);
+
+function openEnv(){
+  document.getElementById("env").classList.add("open");
+  setTimeout(()=>go(4),600);
+}
+
+/* MUSIC LOGIC */
+let currentAudio=null;
+let currentBtn=null;
+function toggleSong(index,btn){
+  const audios=document.querySelectorAll("audio");
+  const audio=audios[index];
+
+  if(currentAudio && currentAudio!==audio){
+    currentAudio.pause();
+    currentAudio.currentTime=0;
+    currentBtn.innerText="▶";
+  }
+  if(audio.paused){
+    audio.play();
+    btn.innerText="⏸";
+    currentAudio=audio;
+    currentBtn=btn;
+  }else{
+    audio.pause();
+    btn.innerText="▶";
+    currentAudio=null;
+    currentBtn=null;
+  }
+}
+function restartAll(){
+  // sab pages hide
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  // first page show
+  document.getElementById("p1").classList.add("active");
+
+  // sab music stop
+  document.querySelectorAll("audio").forEach(a=>{
+    a.pause();
+    a.currentTime = 0;
+  });
+
+  // optional: page 1 auto timer fir se start
+  setTimeout(()=>go(2),3000);
+}
+
+
+</script>
+
+</body>
+</html>
